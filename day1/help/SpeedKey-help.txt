@@ -1,0 +1,6 @@
+main/psvm		-main()
+Ctrl+D			-复制当前行数据到下一行
+Ctrl+Y			-删除所在行，Ctrl+X剪切当前行
+Ctrl+Alt+L		-格式化代码
+Alt+Shift+⬆/⬇		-上下移动当前代码
+Ctrl+/，Ctrl+Shift+/	-对代码进行注释
