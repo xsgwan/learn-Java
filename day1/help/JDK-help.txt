@@ -1,0 +1,6 @@
+JDK(Java Development Kit):	--Java开发工具包
+	JRE(Java Runtime Enviroment):	--Java运行环境
+		JVM(Java Virtual Mechine):	--Java虚拟机，真正运行Java程序的地方
+		核心类库:Java自己写好的程序，给程序员自己的程序调用的。
+	开发工具：
+		Java、Javac···
