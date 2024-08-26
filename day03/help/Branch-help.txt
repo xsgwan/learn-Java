@@ -1,0 +1,7 @@
+switch分支:
+	表达式类型只能是byte、short、int、char,JDK5开始支持枚举，JDK7开始支持String、不支持double、f1oat、long。
+	case给出的值不允许重复，且只能是字面量，不能是变量。
+	正常使用switch的时候，不要忘记写break,否则会出现穿透现象。
+switch分支穿透性：
+	当存在多个case分支的代码相同时，可以把相同的代码放到一个case块中，
+	其他的case块都通过穿透性穿透到该case块执行代码即可，这样可以简化代码。
