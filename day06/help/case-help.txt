@@ -5,3 +5,12 @@
 		A-Z:	(cahr) [random (0 - 25) + 65]
 		a-z:	(char) [random (0 - 25) + 97]
 案例3: 评委打分
+案例4: 数字加密
+	encrypt():
+		先用调用split()将数字拆分成数组，后对每个元素进行加密，最后调用reverse()将数组反转
+	split():
+		先确定数字位数，动态申请数组空间，将每位数字依次放入
+	reverse():
+		i=0;j=numbers.length;
+		i<j:交换i和j处的数据；
+		i++；j--；
