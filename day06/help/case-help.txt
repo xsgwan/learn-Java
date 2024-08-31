@@ -1,1 +1,6 @@
 case1: 买飞机票
+case2: 生成验证码
+	random生成0-2的随机数，0-数字,1-大写字母,2-小写字母
+		0-9:	random 0-9
+		A-Z:	(cahr) [random (0 - 25) + 65]
+		a-z:	(char) [random (0 - 25) + 97]
