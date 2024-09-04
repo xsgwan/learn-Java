@@ -1,0 +1,17 @@
+数组:
+	数组定义完成并启动后，长度就固定了。
+集合:
+	集合大小可变，开发中用的更多。
+public class ArrayList<E>
+	<E>	泛型类，指定某个类型
+	构造器:
+		public ArrayList()				创建一个空的集合对象
+	常用方法:
+		public boolean add(E e)				将指定的元素添加到此集合的末尾
+		public void add(int index,E element)		在此集合中的指定位置插入指定的元素
+		public E get(int index)				返回指定索引处的元素
+		public int size()				返回集合中的元素的个数
+		public E remove(int index)			删除指定索引处的元素，返回被删除的元素
+		public boolean remove(Object o)			删除指定的元素，返回删除是否成功
+								[默认删除的是第一次出现的这个黑马的数据的]
+		public E set(int index,E element)		修改指定索引处的元素，返回被修改的元素
