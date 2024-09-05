@@ -7,3 +7,13 @@ ATM:
 		卡号需要由系统自动生成（卡号要求是8位的数字组成的，且不能重复)
 		把账户对象存入到账户集合中去。
 		提示开户成功！
+		createCardId():		账号生成新卡号
+			循环生成8位随机数，作为卡号
+				getAcountByCardId(String cardId)根据卡号去acounts集合中去找账户，
+					找到返回acount，未找到返回null
+			调用getAcountByCardId()赋值给acount,
+				若acount等于null,则表明卡号与acounts列表中其他账户无重复,
+					则新卡号生成
+				若acount不等于null,则表明卡号与acounts列表中其他账户重复,
+					通过循环重新随机生成卡号，再进行判断
+
