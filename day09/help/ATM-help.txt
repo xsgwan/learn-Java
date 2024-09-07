@@ -61,3 +61,12 @@ ATM:
 				判断当前账户的余额
 					大于0		=>	return false;		不允许注销
 					反之		acounts.remove(loginAcount)	销户
+	passwordChange()
+		判断原密码是否正确
+			true =>	输入新密码，判断是否与原密码相同
+				true =>	确认新密码
+					true =>	密码修改成功 return;	结束死循环
+					false => 重新死循环
+				false => 重新死循环
+			false => 重新死循环
+

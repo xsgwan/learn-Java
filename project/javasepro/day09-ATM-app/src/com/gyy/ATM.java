@@ -203,8 +203,8 @@ public class ATM {
                     transfer();
                     break;
                 case "5":
-                    // passwordChange();
-                    break;
+                    passwordChange();
+                    return;
                 case "6":
                     System.out.println(loginAcount.getUserName() + "您退出系统成功!");
                     return;
@@ -215,6 +215,35 @@ public class ATM {
                     break;
                 default:
                     System.out.println("操作命令不存在,请重新输入");
+            }
+        }
+    }
+
+    private void passwordChange() {
+        System.out.println("==修改密码==");
+        while (true) {
+            System.out.println("请输入原密码:");
+            String oldPassword = sc.next();
+            if (oldPassword.equals(loginAcount.getPassword())) {
+                while (true) {
+                    System.out.println("请输入新密码:");
+                    String newPassword = sc.next();
+                    if (newPassword.equals(oldPassword)) {
+                        System.out.println("新密码不能与原密码相同");
+                    } else {
+                        System.out.println("请确认新密码");
+                        String okNewPassword = sc.next();
+                        if (okNewPassword.equals(newPassword)) {
+                            loginAcount.setPassword(newPassword);
+                            System.out.println("密码修改成功");
+                            return;
+                        } else {
+                            System.out.println("两次输入不一致,请重新输入");
+                        }
+                    }
+                }
+            } else {
+                System.out.println("密码输入有误");
             }
         }
     }
