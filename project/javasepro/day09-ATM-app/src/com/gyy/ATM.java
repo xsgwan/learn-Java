@@ -146,6 +146,28 @@ public class ATM {
     }
 
     private void login() {
-
+        if (acounts.isEmpty()) {
+            System.out.println("您好,当前系统无账户,请先开户再来登录");
+            return;
+        }
+        while (true) {
+            System.out.println("请输入您的卡号:");
+            String cardId = sc.next();
+            Acount acount = getAcountByCardId(cardId);
+            if (acount == null) {
+                System.out.println("系统中不存在该账户卡号,请重新输入");
+            } else {
+                while (true) {
+                    System.out.println("请输入您的密码:");
+                    String password = sc.next();
+                    if (password.equals(acount.getPassword())) {
+                        System.out.println("恭喜您," + acount.getUserName() + ",您已进入系统,您的卡号是:" + acount.getCardId());
+                        return;
+                    } else {
+                        System.out.println("您的密码有误,请重新输入");
+                    }
+                }
+            }
+        }
     }
 }
