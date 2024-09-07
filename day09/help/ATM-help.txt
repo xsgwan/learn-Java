@@ -19,3 +19,13 @@ ATM:
 	login()
 		先判断acounts集合是否为空，是则提醒用户去开户，return; 结束方法
 		再通过两个死循环实现输入正确的卡号以及密码，两者都正确，则通过return; 结束方法
+			判断卡号是否正确逻辑:	通过getAcountByCardId(输入的卡号),返回值为null；则未找到，即卡号错误
+				反之卡号正确
+	showUserCommand()
+		显示操作面板
+		switch{
+			case 1:
+				showLoginAcount();
+				break;
+	showLoginAcount()
+		用户账号信息
