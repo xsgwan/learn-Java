@@ -194,10 +194,10 @@ public class ATM {
                     showLoginAcount();
                     break;
                 case "2":
-                    // deposit();
+                    deposit();
                     break;
                 case "3":
-                    // withdrawal();
+                    withdrawal();
                     break;
                 case "4":
                     // transfer();
@@ -301,7 +301,7 @@ public class ATM {
     /**
      * 取钱
      */
-    /*private void withdrawal() {
+    private void withdrawal() {
         System.out.println("==取钱操作==");
         // 1、判断账户余额是否达到100元，如果不够100元，就不让用户取钱了
         if (loginAcount.getMoney() < 100) {
@@ -326,18 +326,18 @@ public class ATM {
                 break;
             }
         }
-    }*/
+    }
 
     /**
      * 存钱
      */
-    /*private void deposit() {
+    private void deposit() {
         System.out.println("==存钱操作==");
         System.out.println("请输入您的存款金额");
         double money = sc.nextDouble();
         loginAcount.setMoney(loginAcount.getMoney() + money);
         System.out.println("存款" + money + "成功！" + loginAcount.getUserName() + ",您当前余额为" + loginAcount.getMoney());
-    }*/
+    }
 
     /**
      * 展示当前登录的账户信息
