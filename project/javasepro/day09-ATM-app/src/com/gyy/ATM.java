@@ -40,10 +40,10 @@ public class ATM {
      */
     private void createAcount() {
         System.out.println("==系统开户操作==");
-        // 1、创建一个账户对象，用于封装用户的开户信息
+        // 1、创建一个账户对象,用于封装用户的开户信息
         Acount acount = new Acount();
 
-        // 2、需要用户输入自己的开户信息，赋值给账户对象
+        // 2、需要用户输入自己的开户信息,赋值给账户对象
         // 输入名称
         System.out.println("请输入您的账户名称:");
         String name = sc.next();
@@ -80,18 +80,18 @@ public class ATM {
         double limit = sc.nextDouble();
         acount.setLimit(limit);
 
-        // 重点:我们需要为这个账户生成一个卡号(由系统自动生成。8位数字表示，不能与其他账户的卡号重复)
+        // 重点:我们需要为这个账户生成一个卡号(由系统自动生成。8位数字表示,不能与其他账户的卡号重复)
 //        createCardId(acount);
         String newCardId = createCardId();
         acount.setCardId(newCardId);
 
-        // 3、把这个账户对象，存入到账户集合中去
+        // 3、把这个账户对象,存入到账户集合中去
         acounts.add(acount);
         System.out.println("恭喜您," + acount.getUserName() + "开户成功,您的卡号是:" + acount.getCardId());
     }
 
     /**
-     * 返回一个8位  数字的卡号，而且这个卡号不能与其他账户的卡号重复
+     * 返回一个8位  数字的卡号,而且这个卡号不能与其他账户的卡号重复
      */
     private void createCardId(Acount acount) {
         Random r = new Random();
@@ -130,7 +130,7 @@ public class ATM {
             }
             Acount acount = getAcountByCardId(cardId);
             if (acount == null) {
-                // 说明cardId没有找到账户对象，因此cardId没有与其他账户的卡号重复，可以返回它做为一个新卡号
+                // 说明cardId没有找到账户对象,因此cardId没有与其他账户的卡号重复,可以返回它做为一个新卡号
                 return cardId;
             }
         }
@@ -209,7 +209,9 @@ public class ATM {
                     System.out.println(loginAcount.getUserName() + "您退出系统成功!");
                     return;
                 case "7":
-                    // cancellation();
+                    if (deleteAcount()) {
+                        return;
+                    }
                     break;
                 default:
                     System.out.println("操作命令不存在,请重新输入");
@@ -217,54 +219,40 @@ public class ATM {
         }
     }
 
-    /*private void cancellation() {
-     *//*for (int i = 0; i < acounts.size(); i++) {
-            System.out.println(acounts.get(i).getUserName());
-        }
-        System.out.println("-------------------------");*//*
-        if (loginAcount.getMoney() > 0) {
-            System.out.println("您的账户还有余额,请将余额取出,再进行注销");
-        } else {
-            Acount cancellationAcount = loginAcount;
-            acounts.remove(loginAcount);
-            System.out.println(cancellationAcount.getUserName() + ",您已成功注销");
-        }
-        *//*for (int i = 0; i < acounts.size(); i++) {
-            System.out.println(acounts.get(i).getUserName());
-        }*//*
-    }*/
-
-    /*private void passwordChange() {
+    /**
+     * 销户成功
+     */
+    private boolean deleteAcount() {
+        System.out.println("==账户注销==");
+        System.out.println("您确认要注销吗(y/n)");
         while (true) {
-            System.out.println("请输入原密码:");
-            String oldPassword = sc.next();
-            if (!oldPassword.equals(loginAcount.getPassword())) {
-                System.out.println("您输入的密码有误,请重新给输入");
-            } else {
-                while (true) {
-                    String newPassword = null;
-                    while (true) {
-                        System.out.println("请输入新密码:");
-                        newPassword = sc.next();
-                        if (newPassword.equals(oldPassword)) {
-                            System.out.println("新密码不能与原密码一致");
-                        } else {
-                            break;
-                        }
+            String command = sc.next();
+            switch (command) {
+                case "y":
+                    /*for (int i = 0; i < acounts.size(); i++) {
+                        System.out.println(acounts.get(i).getUserName());
                     }
-                    System.out.println("确认新密码:");
-                    String okNewPassword = sc.next();
-                    if (!okNewPassword.equals(newPassword)) {
-                        System.out.println("你两次输入的密码不一致,请重新输入");
-                    } else {
-                        loginAcount.setPassword(newPassword);
-                        System.out.println("密码修改成功,重新登录");
-                        return;
+                    System.out.println("-------------------------");*/
+                    if (loginAcount.getMoney() > 0) {
+                        System.out.println("您的账户还有余额,请将余额取出,再进行注销");
+                        return false;
                     }
-                }
+                    Acount deleteAcount = loginAcount;
+                    acounts.remove(loginAcount);
+                    System.out.println(deleteAcount.getUserName() + ",您已成功注销");
+                    /*for (int i = 0; i < acounts.size(); i++) {
+                        System.out.println(acounts.get(i).getUserName());
+                    }*/
+                    return true;
+                case "n":
+                    System.out.println("好的,您的账户保留");
+                    return false;
+                default:
+                    System.out.println("输入有误,请重新输入");
             }
         }
-    }*/
+    }
+
 
     private void transfer() {
         System.out.println("==用户转账==");
@@ -291,15 +279,15 @@ public class ATM {
             if (transferAcount == null) {
                 System.out.println("您输入的卡号有误,请重新输入");
             } else {
-                // "*" + 原账户名称从索引1处截断，两者拼接起来    =>  "*马吴彦祖"
+                // "*" + 原账户名称从索引1处截断,两者拼接起来    =>  "*马吴彦祖"
                 String name = "*" + transferAcount.getUserName().substring(1);
 
                 // 使用replace(target,replacement)将第一个字符替代为'*'
                 // String name = transferAcount.getUserName().replace(transferAcount.getUserName().charAt(0), '*');
                 System.out.println("请输入" + name + "的姓氏");
                 // 5、判断这个姓氏是否正确
-                
-                //  姓氏用char字符类型存储，取输入的第一个字符作为确认姓氏，判断确认姓氏是否==转账账户名称的第一个字符
+
+                //  姓氏用char字符类型存储,取输入的第一个字符作为确认姓氏,判断确认姓氏是否==转账账户名称的第一个字符
                 /*char preName = sc.next().charAt(0); // 姓氏
                 if (preName == transferAcount.getUserName().charAt(0)) {
                     // 认证通过
@@ -319,11 +307,10 @@ public class ATM {
                     System.out.println("您输入的姓氏有误");
                 }*/
 
-
                 // 姓氏用String字符串记录,判断这个姓氏是否正确逻辑: 判断转账账户名称是否以preName开头
                 String preName = sc.next();
                 if (transferAcount.getUserName().startsWith(preName)) {
-                    // 认证通过，开始转账
+                    // 认证通过,开始转账
                     while (true) {
                         System.out.println("请输入转账金额:");
                         double money = sc.nextDouble();
@@ -352,7 +339,7 @@ public class ATM {
      */
     private void withdrawal() {
         System.out.println("==取钱操作==");
-        // 1、判断账户余额是否达到100元，如果不够100元，就不让用户取钱了
+        // 1、判断账户余额是否达到100元,如果不够100元,就不让用户取钱了
         if (loginAcount.getMoney() < 100) {
             System.out.println("您的账户余额不足100元,不允许取钱");
             return;
@@ -369,7 +356,7 @@ public class ATM {
                 // 4、判断当前取款金额是否超过了每次限额
                 System.out.println("当前取款金额大于您的每次提现额度,每次最多可取" + loginAcount.getLimit());
             } else {
-                // 代表可以开始取钱，更新当前账户余额即可
+                // 代表可以开始取钱,更新当前账户余额即可
                 loginAcount.setMoney(loginAcount.getMoney() - money);
                 System.out.println("取款" + money + "成功,当前您的账户余额为" + loginAcount.getMoney());
                 break;

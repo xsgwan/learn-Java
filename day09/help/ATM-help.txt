@@ -55,3 +55,9 @@ ATM:
 					认证成功	更新loginAcount、transferAcount的余额	return；
 					反之继续死循环
 				反之继续死循环
+	deleteAcount() 返回值boolean
+		switch(command){
+			case "y":
+				判断当前账户的余额
+					大于0		=>	return false;		不允许注销
+					反之		acounts.remove(loginAcount)	销户
