@@ -44,3 +44,14 @@ ATM:
 		死循环
 			判断余额是否足够；判断是否超过每次提现额度；
 				loginAcount.setMoney(loginAcount.getMoney() - money);
+	transfer()
+		判断acounts集合中是否有其他账户
+			没有	=>	return;
+		判断当前账户是否有钱
+			没有	=>	return;
+		死循环
+			通过卡号找到对应转账账户
+				找到则继续确认对方账户姓氏
+					认证成功	更新loginAcount、transferAcount的余额	return；
+					反之继续死循环
+				反之继续死循环

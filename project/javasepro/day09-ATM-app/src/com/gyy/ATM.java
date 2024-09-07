@@ -200,14 +200,14 @@ public class ATM {
                     withdrawal();
                     break;
                 case "4":
-                    // transfer();
+                    transfer();
                     break;
                 case "5":
                     // passwordChange();
                     break;
                 case "6":
-                    // System.out.println(loginAcount.getUserName() + "您退出系统成功!");
-                    break;
+                    System.out.println(loginAcount.getUserName() + "您退出系统成功!");
+                    return;
                 case "7":
                     // cancellation();
                     break;
@@ -266,37 +266,86 @@ public class ATM {
         }
     }*/
 
-    /*private void transfer() {
+    private void transfer() {
+        System.out.println("==用户转账==");
+        // 1、判断系统中是否存在其他账户。
         if (acounts.size() < 2) {
             System.out.println("系统中无其他账户,请再去开户");
             return;
         }
+
+        // 2、判断自己的账户中是否有钱
+        if (loginAcount.getMoney() == 0) {
+            System.out.println("当前账户没钱,无法进行转账");
+            return;
+        }
+
+
+        // 3、真正开始转账了
         while (true) {
             System.out.println("请输入您转账账户的卡号:");
             String cardId = sc.next();
+
+            // 4、判断这个卡号是否正确
             Acount transferAcount = getAcountByCardId(cardId);
             if (transferAcount == null) {
                 System.out.println("您输入的卡号有误,请重新输入");
             } else {
-                while (true) {
-                    System.out.println("请输入转账金额:");
-                    double transferMoney = sc.nextDouble();
-                    if (transferMoney > loginAcount.getMoney()) {
-                        System.out.println("您当前余额不足,请重新输入");
-                    } else if (transferMoney > loginAcount.getLimit()) {
-                        System.out.println("当前转账金额大于您的每次提现额度,请重新输入");
-                    } else {
-                        double money = loginAcount.getMoney() - transferMoney;
-                        loginAcount.setMoney(money);
-                        double transferAcountMoney = transferAcount.getMoney() + transferMoney;
-                        transferAcount.setMoney(transferAcountMoney);
-                        System.out.println("转账成功," + loginAcount.getUserName() + ",您当前账户余额为" + loginAcount.getMoney());
-                        return;
+                // "*" + 原账户名称从索引1处截断，两者拼接起来    =>  "*马吴彦祖"
+                String name = "*" + transferAcount.getUserName().substring(1);
+
+                // 使用replace(target,replacement)将第一个字符替代为'*'
+                // String name = transferAcount.getUserName().replace(transferAcount.getUserName().charAt(0), '*');
+                System.out.println("请输入" + name + "的姓氏");
+                // 5、判断这个姓氏是否正确
+                
+                //  姓氏用char字符类型存储，取输入的第一个字符作为确认姓氏，判断确认姓氏是否==转账账户名称的第一个字符
+                /*char preName = sc.next().charAt(0); // 姓氏
+                if (preName == transferAcount.getUserName().charAt(0)) {
+                    // 认证通过
+                    while (true) {
+                        System.out.println("请输入转账金额:");
+                        double money = sc.nextDouble();
+                        if (money > loginAcount.getMoney()) {
+                            System.out.println("您当前余额不足,请重新输入");
+                        } else {
+                            loginAcount.setMoney(loginAcount.getMoney() - money);
+                            transferAcount.setMoney(transferAcount.getMoney() + money);
+                            System.out.println("转账成功," + loginAcount.getUserName() + ",您当前账户余额为" + loginAcount.getMoney());
+                            return;
+                        }
                     }
+                } else {
+                    System.out.println("您输入的姓氏有误");
+                }*/
+
+
+                // 姓氏用String字符串记录,判断这个姓氏是否正确逻辑: 判断转账账户名称是否以preName开头
+                String preName = sc.next();
+                if (transferAcount.getUserName().startsWith(preName)) {
+                    // 认证通过，开始转账
+                    while (true) {
+                        System.out.println("请输入转账金额:");
+                        double money = sc.nextDouble();
+                        // 6、判断这个金额是否没有超过自己的余额
+                        if (money > loginAcount.getMoney()) {
+                            System.out.println("您当前余额不足,最多可转:" + loginAcount.getMoney());
+                        } else {
+                            // 转给对方
+                            loginAcount.setMoney(loginAcount.getMoney() - money);
+                            transferAcount.setMoney(transferAcount.getMoney() + money);
+                            System.out.println("转账" + money + "成功," + loginAcount.getUserName()
+                                    + ",您当前余额为" + loginAcount.getMoney());
+                            return;
+                        }
+                    }
+                } else {
+                    System.out.println("您输入的姓氏有误");
                 }
             }
+
         }
-    }*/
+    }
 
     /**
      * 取钱
